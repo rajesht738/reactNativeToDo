@@ -94,7 +94,7 @@ const checkTask = (id, newValue) => {
       <TouchableOpacity
         style={styles.addTaskbutton}
         onPress={() => {
-          dispatch(setTaskID(tasks.length + 1))
+          dispatch(setTaskID(tasks.length + 1 ))
           navigation.navigate('Task');
         }}
       >

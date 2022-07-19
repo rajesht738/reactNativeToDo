@@ -7,6 +7,8 @@ import CheckBox from '@react-native-community/checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomes5 from 'react-native-vector-icons/FontAwesome5';
+import PushNotification from 'react-native-push-notification';
+
 export default function Task({ navigation }) {
 
     const { tasks, taskID } = useSelector(state => state.taskReducer);
@@ -21,7 +23,11 @@ export default function Task({ navigation }) {
 
     useEffect(() => {
         getTask();
-    }, [])
+    }, []);
+
+
+
+
     const getTask = () => {
         const Task = tasks.find(task => task.ID === taskID);
         if (Task) {
@@ -65,7 +71,13 @@ export default function Task({ navigation }) {
     }
 
     const setTaskAlarm = () => {
-
+PushNotification.localNotificationSchedule({
+    channelId: "task-channel",
+    title: title,
+    message: desc,
+    date: new Date(Date.now() + parseInt(bellTime) * 60 *1000),
+    allowWhileIdle: true,
+})
     }
     return (
         <View style={styles.body}>
@@ -83,7 +95,7 @@ export default function Task({ navigation }) {
                             <TextInput
                                 style={styles.bell_input}
                                 keyboardType='numeric'
-                                value={bellTime}
+                                value={bellTime.toString()}
                                  onChangeText={(value) => setBellTime(value)}
                             />
                             <Text style={styles.text}>Minute(s)</Text>
@@ -99,7 +111,10 @@ export default function Task({ navigation }) {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.bell_ok_button}
-                                onPress={() => setShowBellModal(false)}
+                                onPress={() => {setShowBellModal(false),
+                                    setTaskAlarm()
+                                }
+                                }
                             >
                                 <Text style={styles.text}>Ok</Text>
 

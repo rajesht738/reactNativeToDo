@@ -2,20 +2,21 @@ import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-//import PushNotification from 'react-native-push-notification';
-const Splash = ({navigation}) => {
+import PushNotification from 'react-native-push-notification';
+const Splash = ({ navigation }) => {
   useEffect(() => {
-   // createChannel();
+    createChannel();
     setTimeout(() => {
       navigation.navigate('My Task');
     }, 5000);
   }, []);
-//  const createChannel = () => {
-//   PushNotification.createChannel({
-//     channelId: "task-channel",
-//     channelName: "Task Channel"
-//   })
-//  }
+  //
+  const createChannel = () => {
+    PushNotification.createChannel({
+      channelId: "task-channel",
+      channelName: "Task Channel"
+    })
+  }
 
   return (
     <View style={styles.body}>
