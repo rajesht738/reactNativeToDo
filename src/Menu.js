@@ -16,6 +16,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ToDo from './ToDo';
 import Done from './Done';
 import Task from './Task';
+import Camera from './camera';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -52,6 +53,7 @@ function HomeScreen() {
                
             />
             <Tab.Screen name={'Done'} component={Done} />
+            
         </Tab.Navigator>
     );
 }
@@ -105,6 +107,15 @@ const Menu = () => {
                     headerTitleAlign: "center"
                 }}
 
+            />
+            <RootStack.Screen
+                name="Camera"
+                component={Camera}
+                options={{
+                    gestureEnabled: false,
+                    headerBackVisible: false,
+                    headerTitleAlign: "center"
+                }}
             />
 
 
